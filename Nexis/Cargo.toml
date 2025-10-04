@@ -1,0 +1,36 @@
+[package]
+name = "nexis"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bootloader = "0.10"
+x86_64 = "0.14"
+spin = "0.9"
+lazy_static = { version = "1.4", features = ["spin_no_std"] }
+uart_16550 = "0.2"
+pc-keyboard = "0.7"
+linked_list_allocator = "0.10"
+
+[dev-dependencies]
+bootimage = "0.10"
+
+[features]
+default = []
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[package.metadata.bootimage]
+run-command = [
+    "qemu-system-x86_64",
+    "-drive", "format=raw,file=target/x86_64-nexis/debug/bootimage-nexis.bin",
+    "-serial", "stdio",
+    "-display", "default,show-cursor=on"
+]
+
+[build-dependencies]
+bootloader = "0.10"

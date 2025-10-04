@@ -1,0 +1,12 @@
+[build]
+target = "x86_64-nexis.json"
+
+[unstable]
+build-std = ["core", "alloc", "compiler_builtins"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+

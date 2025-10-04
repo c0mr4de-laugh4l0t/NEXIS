@@ -1,0 +1,41 @@
+   Compiling ironveil v0.1.0 (/workspaces/Rust-OS-)
+error[E0412]: cannot find type `Result` in crate `crossterm`
+  --> src/main.rs:10:25
+   |
+10 | fn main() -> crossterm::Result<()> {
+   |                         ^^^^^^ not found in `crossterm`
+   |
+help: consider importing one of these items
+   |
+1  + use crate::io::Result;
+   |
+1  + use std::fmt::Result;
+   |
+1  + use std::io::Result;
+   |
+1  + use std::result::Result;
+   |
+     and 3 other candidates
+help: if you import `Result`, refer to it directly
+   |
+10 - fn main() -> crossterm::Result<()> {
+10 + fn main() -> Result<()> {
+   |
+
+warning: unused imports: `Rng` and `distributions::Alphanumeric`
+ --> src/main.rs:7:12
+  |
+7 | use rand::{distributions::Alphanumeric, Rng};
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `Write`
+ --> src/main.rs:8:21
+  |
+8 | use std::io::{self, Write};
+  |                     ^^^^^
+
+For more information about this error, try `rustc --explain E0412`.
+warning: `ironveil` (bin "ironveil") generated 2 warnings
+error: could not compile `ironveil` (bin "ironveil") due to 1 previous error; 2 warnings emitted
