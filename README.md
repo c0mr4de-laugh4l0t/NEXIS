@@ -41,32 +41,64 @@ Despite this, the core kernel code is in place and actively evolving.
 
 ## Project Structure
 ```
-.
 ├── LICENSE
 ├── README.md
 ├── Cargo.toml
-├── Nexis/          # Kernel source code
-│   └── src/
-│       ├── main.rs
-│       ├── alloc.rs
-│       ├── context.S
-│       ├── fs.rs
-│       ├── interrupt.rs
-│       ├── kb.rs
-│       ├── lib.rs
-│       ├── memory.rs
-│       ├── pit.rs
-│       ├── process.rs
-│       ├── scheduler.rs
-│       ├── syscall.rs
-│       ├── syscall_dispatch.rs
-│       ├── task.rs
-│       ├── userland.rs
-│       └── vga.rs
-└── IronVeil/       # OS shell & higher-level functions
+├── Nexis/                  # Rust-based kernel (Nexis)
+│   ├── .cargo/
+│   ├── asm/                # Assembly boot and low-level routines
+│   │   ├── boot.S
+│   │   └── context.S
+│   ├── config/             # Kernel configuration & constants
+│   │   ├── defs.rs
+│   │   └── consts.rs
+│   ├── core/               # Core kernel logic and scheduling
+│   │   ├── memory.rs
+│   │   ├── scheduler.rs
+│   │   ├── tasks.rs
+│   │   ├── process.rs
+│   │   ├── syscall.rs
+│   │   └── syscall_dispatch.rs
+│   ├── cortex/             # CPU, architecture, and init routines
+│   │   ├── boot.rs
+│   │   ├── context.rs
+│   │   └── mod.rs
+│   ├── drivers/            # Hardware drivers
+│   │   ├── vga.rs
+│   │   ├── pit.rs
+│   │   ├── kb.rs
+│   │   ├── fs.rs
+│   │   └── interrupts.rs
+│   ├── userland/           # Programs & services in ring 3
+│   │   ├── init.rs
+│   │   ├── shell.rs
+│   │   └── mod.rs
+│   ├── utils/              # Logging, macros, debugging helpers
+│   │   ├── macros.rs
+│   │   ├── logging.rs
+│   │   └── mod.rs
+│   ├── scripts/            # Build & QEMU scripts
+│   │   └── qemu-run.sh
+│   ├── build.rs
+│   ├── Cargo.toml
+│   ├── linker.ld
+│   ├── lib.rs
+│   ├── main.rs
+│   ├── x86_64-nexis.json
+│   └── .gitignore
+└── IronVeil/               # OS shell & higher-level interface
+    ├── Cargo.toml
+    ├── README.md
+    ├── assets/
+    ├── ui/
     └── src/
         ├── main.rs
-        └── ...
+        ├── tui.rs
+        ├── cli.rs
+        ├── network.rs
+        ├── storage.rs
+        └── mod.rs
+
 ```
 
 ---
